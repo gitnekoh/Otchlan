@@ -1,0 +1,6 @@
+name: Vacuum
+version: ${project.version}
+main: me.nekoh.vacuum.Vacuum
+commands:
+   vacuum:
+       aliases: [otchlan]
