@@ -14,7 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class VacuumTask extends BukkitRunnable {
 
-    private int time = 60;
+    private int time = 180;
     private final Inventory vacuumInventory = Bukkit.createInventory(null, 54, ChatColor.GRAY + "Otchlan");
 
     @Override
@@ -22,7 +22,7 @@ public class VacuumTask extends BukkitRunnable {
         if (time == 0) {
             TextComponent message = new TextComponent(ChatColor.DARK_AQUA + "Otwarto otchlan na 30 sekund.");
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/vacuum"));
-            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Kliknij aby otworzyc otchlan").create()));
+            message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Kliknij aby otworzyc otchlan.").create()));
 
             Bukkit.getServer().getOnlinePlayers().forEach(player -> player.spigot().sendMessage(message));
             Bukkit.getServer().getWorlds().get(0).getEntities().stream().filter(entity -> entity instanceof Item).forEach(entity -> {
@@ -34,11 +34,11 @@ public class VacuumTask extends BukkitRunnable {
                 Bukkit.getServer().getOnlinePlayers().stream().filter(player -> player.getOpenInventory().getTitle().equalsIgnoreCase(vacuumInventory.getTitle())).forEach(HumanEntity::closeInventory);
                 Bukkit.getServer().getOnlinePlayers().forEach(player -> player.sendMessage(ChatColor.RED + "Otchlan zostala zamknieta."));
                 vacuumInventory.clear();
-                time = 60;
+                time = 180;
             }, 20 * 30);
 
         } else if ((time % 10 == 0 || time <= 5) & time > 0) {
-            Bukkit.getServer().getOnlinePlayers().forEach(player -> player.sendMessage(ChatColor.AQUA + "Otwarcie otchlani za " + time + " sekund!"));
+            Bukkit.getServer().getOnlinePlayers().forEach(player -> player.sendMessage(ChatColor.AQUA + "Otwarcie otchlani za " + time + " sekund."));
         } else if (time < 0) {
             return;
         }
